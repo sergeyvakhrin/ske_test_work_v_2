@@ -20,8 +20,7 @@ class User(AbstractUser):
     city = models.CharField(max_length=100, verbose_name='Город', help_text='Укажите город', **NULLABLE)
     street = models.CharField(max_length=100, verbose_name='Улица', help_text='Укажите улицу', **NULLABLE)
     house_number = models.CharField(max_length=10, verbose_name='Номер дома', help_text='Укажите номер дома', **NULLABLE)
-    client_type = models.CharField(max_length=100, choices=CHOICES, unique=True, verbose_name='Тип клиента',                                   help_text='Укажите тип клиента')
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь', help_text='Выберите пользователя', related_name='user_retail')
+    client_type = models.CharField(max_length=100, choices=CHOICES, verbose_name='Тип клиента', help_text='Укажите тип клиента')
     # product = models.ForeignKey(Product, on_delete=models.SET_NULL, verbose_name='Продукты', **NULLABLE)
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     supplier = models.ForeignKey('self', on_delete=models.SET_NULL, verbose_name='Поставщик', help_text='Укажите поставщика', **NULLABLE, related_name='user_supplier')
@@ -35,4 +34,4 @@ class User(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return self.email
+        return self.name
