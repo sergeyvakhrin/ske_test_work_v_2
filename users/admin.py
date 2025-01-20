@@ -11,6 +11,10 @@ class UserAdmin(admin.ModelAdmin):
                     'created_at', 'supplier_name', 'product_list', 'debt']
     list_display_links = list_display
     exclude = ['password', 'last_name', 'first_name', 'last_login', 'date_joined', 'debt']
+    search_fields = ('city', 'name', 'client_type')
+    list_filter = ('city', 'name', 'client_type')
+    actions = ['set_debt_zero']
+    save_on_top = True
 
     @admin.display(description='Поставщик')
     def supplier_name(self, user: User):
@@ -32,7 +36,7 @@ class UserAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         """ Делаем поля только для чтения, если просмотр """
         if obj:
-            return self.readonly_fields + ('last_login', 'client_type', 'supplier', 'debt', 'date_joined', )
+            return self.readonly_fields + ('client_type', 'supplier', 'debt', )
         return self.readonly_fields
 
     # def get_exclude(self, request, obj=None):
@@ -41,3 +45,9 @@ class UserAdmin(admin.ModelAdmin):
     #         self.exclude += ('debt', 'supplier', )
     #         return self.exclude
     #     return self.exclude
+
+    @admin.action(description='Обнулить задолженность перед поставщиком')
+    def set_debt_zero(self, request, queryset):
+        """ Логика дополнительного действия """
+        count = queryset.update(debt=0)
+        self.message_user(request, f'Изменено {count} записей')

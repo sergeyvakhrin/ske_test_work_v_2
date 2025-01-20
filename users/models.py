@@ -8,9 +8,9 @@ NULLABLE = {"null": True, "blank": True}
 class User(AbstractUser):
     """ Модель для авторизации """
     CHOICES = {
-        "FACTORY": "Factory",
-        "RETAIL": "Retail",
-        "INDIVIDUAL": "Individual entrepreneur"
+        "FACTORY": "Завод",
+        "RETAIL": "Розничная сеть",
+        "INDIVIDUAL": "Индивидуальный предприниматель"
     }
     username = None
 

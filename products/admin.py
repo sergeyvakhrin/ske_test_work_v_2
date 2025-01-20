@@ -9,7 +9,9 @@ from users.models import User
 class ProductAdmin(admin.ModelAdmin):
     """ Выводим в админ панель таблицу индивидуальных предпринимателей """
     list_display = ['id', 'name', 'model_product', 'description', 'prod_photo', 'is_published', 'release_date']
-    list_display_links = ['id', 'name', 'model_product', 'description', 'is_published', 'release_date']
+    list_display_links = ['id', 'name', 'model_product', 'description', 'prod_photo', 'is_published', 'release_date']
+    search_fields = ['name', 'model_product', 'description', 'is_published', 'release_date']
+    list_filter = ['name', 'model_product', 'description', 'is_published', 'release_date']
 
     def get_readonly_fields(self, request, obj=None):
         """ Делаем поля только для чтения, если просмотр """
@@ -29,8 +31,10 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Warehouse)
 class ProductAdmin(admin.ModelAdmin):
     """ Выводим в админ панель таблицу индивидуальных предпринимателей """
-    list_display = ['id', 'user_name', 'user_email', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price']
-    list_display_links =['id', 'user_name', 'user_email', 'product', 'quantity', 'price']
+    list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
+    list_display_links = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
+    search_fields = ['user', 'product', 'quantity', 'price']
+    list_filter = ['user', 'product', 'quantity', 'price']
 
     @admin.display(description='Модель')
     def product_model(self, warehouse: Warehouse):

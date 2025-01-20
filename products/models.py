@@ -32,7 +32,7 @@ class Warehouse(models.Model):
 
     class Meta:
         verbose_name = 'Продукт на склад'
-        verbose_name_plural = 'Продукты на Складе'
+        verbose_name_plural = 'Продукты на Складах'
 
     def __str__(self):
         return self.user.name
