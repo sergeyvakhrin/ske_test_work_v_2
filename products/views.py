@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.exceptions import APIException
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from products.models import Warehouse
 from users.models import User
@@ -24,21 +24,21 @@ class UserListAPIView(ListAPIView):
     """ Контроллер просмотра списка пользователей """
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
 
 class UserRetrieveAPIView(RetrieveAPIView):
     """ Контроллер получение отдельного пользователя """
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
 
 class UserUpdateAPIView(UpdateAPIView):
     """ Контроллер изменения данных Пользователей """
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     def get_serializer_class(self):
         """Выбираем сериалайзер, для исключить редактирования полей client_type, debt, supplier для Update """
@@ -51,7 +51,7 @@ class UserUpdateAPIView(UpdateAPIView):
 class UserDeleteAPIView(DestroyAPIView):
     """ Контроллер удаления пользователей """
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     def delete(self, request, *args, **kwargs):
         """ Проверяем наличие покупателей и товаров на складе """

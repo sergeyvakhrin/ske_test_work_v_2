@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "526aebcf-2285-400d-8eee-f73f6760abdc",
+		"name": "sky_test_work_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39328990"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:8000/api/user/delete/10/",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3Mzg0NDIyLCJpYXQiOjE3MzczODM1MjIsImp0aSI6ImYzNmUwNzExYzU5YjRhZWQ5NjE5NGE5ZGExMTEzNzljIiwidXNlcl9pZCI6MTF9.5pVHqhTOxYv3uOjluAW7PdCYyPgeH4cRz9gSn55fAOY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/delete/10/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"delete",
+						"10",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/user/update/8/",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3Mzg0NDIyLCJpYXQiOjE3MzczODM1MjIsImp0aSI6ImYzNmUwNzExYzU5YjRhZWQ5NjE5NGE5ZGExMTEzNzljIiwidXNlcl9pZCI6MTF9.5pVHqhTOxYv3uOjluAW7PdCYyPgeH4cRz9gSn55fAOY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"individual3@mail.ru\",\r\n    \"password\": \"1234\",\r\n    \"name\": \"ИП Марков В.П.\",\r\n    \"country\": \"Россия\",\r\n    \"city\": \"Тамбов\",\r\n    \"street\": null,\r\n    \"house_number\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/update/8/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"update",
+						"8",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/user/1/",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3Mzg0MTgyLCJpYXQiOjE3MzczODMyODIsImp0aSI6IjBjZGNhNzI1NmRjMTRiZDI5ZWVkNWE0Y2FmYWNmOTgwIiwidXNlcl9pZCI6MTB9.zbwLq0SKi0J7Dfl7wC9qgcwmI2pLwHkmZq_DRxUYqQw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/user/list/",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3Mzg0MTgyLCJpYXQiOjE3MzczODMyODIsImp0aSI6IjBjZGNhNzI1NmRjMTRiZDI5ZWVkNWE0Y2FmYWNmOTgwIiwidXNlcl9pZCI6MTB9.zbwLq0SKi0J7Dfl7wC9qgcwmI2pLwHkmZq_DRxUYqQw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/list/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"list",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/login/",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"individual5@mail.ru\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/register/",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"individual5@mail.ru\",\r\n    \"password\": \"1234\",\r\n    \"name\": \"ИП Марков П.Р.\",\r\n    \"country\": \"Россия\",\r\n    \"city\": \"Тамбов\",\r\n    \"street\": null,\r\n    \"house_number\": null,\r\n    \"client_type\": \"INDIVIDUAL\",\r\n    \"supplier\": 2,\r\n    \"debt\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
