@@ -34,9 +34,13 @@ class UserAdmin(admin.ModelAdmin):
         return 'Нет продуктов'
 
     def get_readonly_fields(self, request, obj=None):
-        """ Делаем поля только для чтения, если просмотр """
+        """ Делаем поля только для чтения, если просмотр """ # TODO: упростить каскад условий
         if obj:
-            return self.readonly_fields + ('client_type', 'supplier', 'debt', )
+            if obj.supplier_id is None:
+                if obj.client_type == 'FACTORY':
+                    return self.readonly_fields + ('client_type', 'supplier', 'debt',)
+                return self.readonly_fields + ('client_type', 'debt',)
+            return self.readonly_fields + ('client_type', 'supplier', 'debt',)
         return self.readonly_fields
 
     # def get_exclude(self, request, obj=None):

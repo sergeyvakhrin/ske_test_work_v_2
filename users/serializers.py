@@ -33,6 +33,12 @@ class UserSerializer(serializers.ModelSerializer):
             "buyers"
         ]
 
+    def get_buyers(self, instance):
+        """ Метод получения списка Покупателей """
+        buyers = instance.user_supplier.all()
+        if buyers:
+            return UserSerializer(buyers, many=True).data
+
     def validate_supplier(self, value):
         """
         Генерирует ошибку при попытке назначить поставщика Заводу
@@ -44,9 +50,26 @@ class UserSerializer(serializers.ModelSerializer):
             raise APIException("Необходимо указать поставщика.")
         return value
 
-    def get_buyers(self, instance):
-        """ Метод получения списка Покупателей """
-        buyers = instance.user_supplier.all()
-        if buyers:
-            return UserSerializer(buyers, many=True).data
-        return 0
+
+class UserSerializerWithoutDebtField(serializers.ModelSerializer):
+    """ Сериализатор для модели User без полей client_type, debt, supplier для Update """
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "password",
+            "last_login",
+            "is_superuser",
+            "is_staff",
+            "is_active",
+            "date_joined",
+            "email",
+            "name",
+            "country",
+            "city",
+            "street",
+            "house_number",
+            "created_at",
+            "groups",
+            "user_permissions"
+        ]
