@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from products.models import Warehouse
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
+from users.servises import IsOwner, IsModer, CustomPagination
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -14,7 +15,7 @@ class UserCreateAPIView(CreateAPIView):
     permission_classes = (AllowAny, )
 
     def perform_create(self, serializer):
-        """  """
+        """ Хешируем пароль """
         user = serializer.save(is_active=True)
         user.set_password(user.password)
         user.save()
@@ -24,21 +25,22 @@ class UserListAPIView(ListAPIView):
     """ Контроллер просмотра списка пользователей """
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsModer,)
+    pagination_class = CustomPagination
 
 
 class UserRetrieveAPIView(RetrieveAPIView):
     """ Контроллер получение отдельного пользователя """
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwner | IsModer)
 
 
 class UserUpdateAPIView(UpdateAPIView):
     """ Контроллер изменения данных Пользователей """
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwner | IsModer)
 
     def get_serializer_class(self):
         """Выбираем сериалайзер, для исключить редактирования полей client_type, debt, supplier для Update """
@@ -51,7 +53,7 @@ class UserUpdateAPIView(UpdateAPIView):
 class UserDeleteAPIView(DestroyAPIView):
     """ Контроллер удаления пользователей """
     queryset = User.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwner)
 
     def delete(self, request, *args, **kwargs):
         """ Проверяем наличие покупателей и товаров на складе """

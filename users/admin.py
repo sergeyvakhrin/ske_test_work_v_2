@@ -10,11 +10,17 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ['id','name', 'email', 'client_type', 'country', 'city', 'street', 'house_number',
                     'created_at', 'supplier_name', 'product_list', 'debt']
     list_display_links = list_display
-    exclude = ['password', 'last_name', 'first_name', 'last_login', 'date_joined', 'debt']
+    exclude = ['last_name', 'first_name', 'last_login', 'date_joined', 'debt']
     search_fields = ('city', 'name', 'client_type')
     list_filter = ('city', 'name', 'client_type')
     actions = ['set_debt_zero']
     save_on_top = True
+
+    def save_model(self, request, obj, form, change):
+        """ Хэшируем пароль """
+        if "password" in form.changed_data:
+            obj.set_password(obj.password)
+            super().save_model(request, obj, form, change)
 
     @admin.display(description='Поставщик')
     def supplier_name(self, user: User):
