@@ -20,7 +20,7 @@ class UserAdmin(admin.ModelAdmin):
         """ Хэшируем пароль """
         if "password" in form.changed_data:
             obj.set_password(obj.password)
-            super().save_model(request, obj, form, change)
+        super().save_model(request, obj, form, change)
 
     @admin.display(description='Поставщик')
     def supplier_name(self, user: User):
@@ -29,14 +29,15 @@ class UserAdmin(admin.ModelAdmin):
 
     @admin.display(description='Список товаров')
     def product_list(self, user: User):
-        """ Выводим список продуктов конкретного завода """
+        """ Выводим список продуктов пользователя """
         warehouses = Warehouse.objects.filter(user=user)
         if warehouses:
             products_name = []
             for warehous in warehouses:
                 products_name.append(warehous.product.name)
+            products_name = set(products_name)
             if len(products_name) > 0:
-                return products_name
+                return list(products_name)
         return 'Нет продуктов'
 
     def get_readonly_fields(self, request, obj=None):
