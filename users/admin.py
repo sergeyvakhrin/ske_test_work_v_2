@@ -22,6 +22,13 @@ class UserAdmin(admin.ModelAdmin):
             obj.set_password(obj.password)
         super().save_model(request, obj, form, change)
 
+    def delete_queryset(self, request, queryset):
+        """ Пере привязываем покупателей к следующему по иерархии поставщику, если удален текущий """
+        for user in queryset:
+            if user.supplier:
+                User.objects.filter(supplier=user).update(supplier=user.supplier)
+        queryset.delete()
+
     @admin.display(description='Поставщик')
     def supplier_name(self, user: User):
         """ Выводим название поставщика """
