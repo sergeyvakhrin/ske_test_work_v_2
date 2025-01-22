@@ -1,11 +1,9 @@
 from django.contrib import admin
-from django.db.models import Sum
 from django.utils.safestring import mark_safe
 
 from products.forms import FormWarehouse
 from products.models import Product, Warehouse
 from users.models import User
-from users.servises import validate_quantity, correct_quantity_supplier
 
 
 @admin.register(Product)
@@ -26,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
     @admin.display(description='Изображение')
     def prod_photo(self, product: Product):
         """ Отображение фото в админке """
-        # TODO: картинка не отображается
+                                                                            # TODO: картинка не отображается
         if product.photo:
             return mark_safe(f"<img src='{product.photo.url}' width=50>")
         return "Без фото"
@@ -61,7 +59,7 @@ class WarehouseAdmin(admin.ModelAdmin):
     #         if warehouse:
     #             validate_quantity(user, obj, warehouse)
     #             super().save_model(request, obj, form, change)
-    #             # raise f'У поставщика только {warehouse} штук на складе.' # TODO: добавить вывод в админку
+    #             # raise f'У поставщика только {warehouse} штук на складе.'
     #
     #         correct_quantity_supplier(warehouse_supplier, obj)
     #
@@ -97,7 +95,7 @@ class WarehouseAdmin(admin.ModelAdmin):
     @admin.display(description='Изображение')
     def prod_photo(self, warehouse: Warehouse):
         """ Отображение фото в админке """
-        # TODO: картинка не отображается
+                                                                        # TODO: картинка не отображается
         if warehouse.product.photo:
             return mark_safe(f"<img src='{warehouse.product.photo.url}' width=50>")
         return "Без фото"

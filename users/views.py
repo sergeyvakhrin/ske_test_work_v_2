@@ -4,7 +4,8 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from products.models import Warehouse
+from products.models import Warehouse, Product
+from products.serializers import ProductSerializer
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
 from users.servises import IsOwner, IsModer, CustomPagination
@@ -71,3 +72,42 @@ class UserDeleteAPIView(DestroyAPIView):
             # raise APIException('Сначала перенаправьте покупателей.')
 
         return self.destroy(request, *args, **kwargs)
+
+
+class ProductCreateAPIView(CreateAPIView):
+    """ Контроллер создания номенклатуры продуктов. """
+    serializer_class = ProductSerializer
+    permission_classes = (IsAuthenticated, )
+
+
+class ProductListAPIView(ListAPIView):
+    """ Контроллер вывода номенклатуры продуктов """
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+    permission_classes = (IsAuthenticated, )
+    pagination_class = CustomPagination
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ['name', 'model_product', 'description']
+    filterset_fields = ('name', 'model_product', 'description',)
+
+
+class ProductRetrieveAPIView(RetrieveAPIView):
+    """ Контроллер получение отдельного продукта """
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+    permission_classes = (IsAuthenticated, )
+
+
+class ProductUpdateAPIView(UpdateAPIView):
+    """ Контроллер изменения продукта """
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+    permission_classes = (IsAuthenticated, )
+
+
+class ProductDeleteAPIView(DestroyAPIView):
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated, IsModer)
+
+    def delete(self, request, *args, **kwargs):
+        pass
