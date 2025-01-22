@@ -3,7 +3,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from users.views import UserCreateAPIView, UserListAPIView, UserRetrieveAPIView, UserUpdateAPIView, UserDeleteAPIView, \
-    ProductCreateAPIView, ProductListAPIView, ProductRetrieveAPIView, ProductUpdateAPIView, ProductDeleteAPIView
+    ProductCreateAPIView, ProductListAPIView, ProductRetrieveAPIView, ProductUpdateAPIView, ProductDeleteAPIView, \
+    WarehouseCreateAPIView, WarehouseListAPIView, WarehouseRetrieveAPIView, WarehouseDeleteAPIView
 from users.apps import UsersConfig
 
 app_name = UsersConfig.name
@@ -23,4 +24,9 @@ urlpatterns = [
     path("product/<int:pk>/", ProductRetrieveAPIView.as_view(), name="api-product-get"),
     path("product/update/<int:pk>/", ProductUpdateAPIView.as_view(), name="api-product-update"),
     path("product/delete/<int:pk>/", ProductDeleteAPIView.as_view(), name="api-product-delete"),
+
+    path("warehouse/create/", WarehouseCreateAPIView.as_view(), name="api-warehouse-create"),
+    path("warehouse/list/", WarehouseListAPIView.as_view(), name="api-warehouse-list"),
+    path("warehouse/<int:pk>/", WarehouseRetrieveAPIView.as_view(), name="api-warehouse-get"),
+    path("warehouse/delete/<int:pk>/", WarehouseDeleteAPIView.as_view(), name="api-warehouse-delete"),
 ]

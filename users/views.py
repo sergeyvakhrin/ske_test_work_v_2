@@ -6,7 +6,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView,
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from products.models import Warehouse, Product
-from products.serializers import ProductSerializer
+from products.serializers import ProductSerializer, WarehouseSerializer
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
 from users.servises import IsOwner, IsModer, CustomPagination
@@ -120,3 +120,38 @@ class ProductDeleteAPIView(DestroyAPIView):
                 instance.save()
                 raise APIException('Нельзя удалить товар, если он находится на складе у клиента. Товар убран из продажи')
             instance.delete()
+
+
+class WarehouseCreateAPIView(CreateAPIView):
+    """ Контроллер создания операции по складу """
+    serializer_class = WarehouseSerializer
+    permission_classes = (AllowAny,)
+
+
+class WarehouseListAPIView(ListAPIView):
+    """ Контроллер просмотра списка операции по складу """
+    serializer_class = WarehouseSerializer
+    queryset = Warehouse.objects.all()
+    permission_classes = (IsModer,)
+    pagination_class = CustomPagination
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ['product']
+    filterset_fields = ('product',)
+
+
+class WarehouseRetrieveAPIView(RetrieveAPIView):
+    """ Контроллер получение отдельной операции по складу """
+    serializer_class = WarehouseSerializer
+    queryset = Warehouse.objects.all()
+    permission_classes = (IsAuthenticated, IsOwner | IsModer)
+
+
+class WarehouseDeleteAPIView(DestroyAPIView):
+    """ Контроллер удаления операции по складу """
+    queryset = Warehouse.objects.all()
+    permission_classes = (IsModer,)
+
+    def perform_destroy(self, instance):
+        """ Запрещаем удаление операций по складу """
+        if instance:
+            raise APIException('Нельзя удалять операции по складу без соответствующих документов!')
