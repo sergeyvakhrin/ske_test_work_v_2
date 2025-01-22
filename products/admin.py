@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db.models import Sum
 from django.utils.safestring import mark_safe
 
+from products.forms import FormWarehouse
 from products.models import Product, Warehouse
 from users.models import User
 from users.servises import validate_quantity, correct_quantity_supplier
@@ -34,6 +35,7 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Warehouse)
 class WarehouseAdmin(admin.ModelAdmin):
     """ Выводим в админ панель таблицу товары на складе конкретного пользователя """
+    form = FormWarehouse
     fields = ['user', 'product', 'quantity', 'price']
     list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
     list_display_links = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
@@ -42,30 +44,29 @@ class WarehouseAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-    def save_model(self, request, obj, form, change):
-        """
-        Добавляем сумму задолженности перед поставщиком.
-        Проверяем наличие у поставщика товара у поставщика.
-        Уменьшаем количество товара у поставщика на складе.
-        """
-        user = form.cleaned_data.get('user')
-        if user and user.client_type != 'FACTORY':
-            supplier = user.supplier
-            product = form.cleaned_data.get('product')
-            warehouse_supplier = Warehouse.objects.filter(user=supplier, product=product)
-            warehouse = warehouse_supplier.aggregate(Sum('quantity')).get('quantity__sum')
 
-            if warehouse:
-                validate_quantity(user, obj, warehouse)
-                super().save_model(request, obj, form, change)
-                # raise f'У поставщика только {warehouse} штук на складе.' # TODO: добавить вывод в админку
-            else:
-                obj.quantity = 0 # TODO: добавить валидацию поля debt на 0 и None, что бы убрать этот костыль
-
-            correct_quantity_supplier(warehouse_supplier, obj)
-
-        super().save_model(request, obj, form, change)
-        Warehouse.objects.filter(quantity=0).delete()
+    # def save_model(self, request, obj, form, change):
+    #     """
+    #     Добавляем сумму задолженности перед поставщиком.
+    #     Проверяем наличие у поставщика товара у поставщика.
+    #     Уменьшаем количество товара у поставщика на складе.
+    #     """
+    #     user = form.cleaned_data.get('user')
+    #     if user and user.client_type != 'FACTORY':
+    #         supplier = user.supplier
+    #         product = form.cleaned_data.get('product')
+    #         warehouse_supplier = Warehouse.objects.filter(user=supplier, product=product)
+    #         warehouse = warehouse_supplier.aggregate(Sum('quantity')).get('quantity__sum')
+    #
+    #         if warehouse:
+    #             validate_quantity(user, obj, warehouse)
+    #             super().save_model(request, obj, form, change)
+    #             # raise f'У поставщика только {warehouse} штук на складе.' # TODO: добавить вывод в админку
+    #
+    #         correct_quantity_supplier(warehouse_supplier, obj)
+    #
+    #     super().save_model(request, obj, form, change)
+    #     Warehouse.objects.filter(quantity=0).delete()
 
     @admin.display(description='Модель')
     def product_model(self, warehouse: Warehouse):
