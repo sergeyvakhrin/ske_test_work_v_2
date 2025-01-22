@@ -15,6 +15,10 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['name', 'model_product', 'description', 'is_published', 'release_date']
     save_on_top = True
 
+    def delete_queryset(self, request, queryset):
+        """ Делаем товар не активным при попытке его удаления """
+        queryset.update(is_published=False)
+
     def get_readonly_fields(self, request, obj=None):
         """ Делаем поля только для чтения, если просмотр """
         if obj:
@@ -35,7 +39,7 @@ class WarehouseAdmin(admin.ModelAdmin):
     """ Выводим в админ панель таблицу товары на складе конкретного пользователя """
     form = FormWarehouse
     fields = ['user', 'product', 'quantity', 'price']
-    list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
+    list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'prod_is_published', 'quantity', 'price', 'user_name', 'user_email']
     list_display_links = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
     search_fields = ['user', 'product', 'quantity', 'price']
     list_filter = ['user', 'product', 'quantity', 'price']
@@ -69,12 +73,32 @@ class WarehouseAdmin(admin.ModelAdmin):
     @admin.display(description='Модель')
     def product_model(self, warehouse: Warehouse):
         """ Выводим модель товара """
-        return warehouse.product.model_product
+        if warehouse.product:
+            return warehouse.product.model_product
+        return f"Продукт удален"
 
     @admin.display(description='Описание')
     def product_description(self, warehouse: Warehouse):
         """ Выводим описание товара """
-        return warehouse.product.description
+        if warehouse.product:
+            return warehouse.product.description
+        return f"Продукт удален"
+
+    @admin.display(description='В продаже')
+    def prod_is_published(self, warehouse: Warehouse):
+        """ Выводим наименование Организации """
+        if warehouse.product:
+            return warehouse.product.is_published
+        return f"Продукт удален"
+
+    @admin.display(description='Изображение')
+    def prod_photo(self, warehouse: Warehouse):
+        """ Отображение фото в админке """
+        if warehouse.product:                                # TODO: картинка не отображается
+            if warehouse.product.photo:
+                return mark_safe(f"<img src='{warehouse.product.photo.url}' width=50>")
+            return "Без фото"
+        return f"Продукт удален"
 
     @admin.display(description='Название Организации')
     def user_name(self, user: User):
@@ -92,10 +116,4 @@ class WarehouseAdmin(admin.ModelAdmin):
             return self.readonly_fields + ('user', 'product', 'quantity', 'price')
         return self.readonly_fields
 
-    @admin.display(description='Изображение')
-    def prod_photo(self, warehouse: Warehouse):
-        """ Отображение фото в админке """
-                                                                        # TODO: картинка не отображается
-        if warehouse.product.photo:
-            return mark_safe(f"<img src='{warehouse.product.photo.url}' width=50>")
-        return "Без фото"
+

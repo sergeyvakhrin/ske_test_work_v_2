@@ -29,26 +29,29 @@ class CustomPagination(PageNumberPagination):
 
 def validate_warehouse(user, product, quantity, price):
     """ Проверка введенных данный при создании записи на складе. """
-    if user and user.client_type != 'FACTORY':
-        supplier = user.supplier
-        warehouse_supplier = Warehouse.objects.filter(user=supplier, product=product)
-        warehouse = warehouse_supplier.aggregate(Sum('quantity')).get('quantity__sum')
-        if warehouse:
+    if not product.is_published:
+        raise forms.ValidationError('Продукт запрещен к реализации!!!')
+    else:
+        if user and user.client_type != 'FACTORY':
+            supplier = user.supplier
+            warehouse_supplier = Warehouse.objects.filter(user=supplier, product=product)
+            warehouse = warehouse_supplier.aggregate(Sum('quantity')).get('quantity__sum')
+            if warehouse:
+                if quantity == 0 or quantity is None:
+                    raise forms.ValidationError('Укажите количество.')
+                if warehouse < quantity:
+                    raise forms.ValidationError(f'У поставщика {warehouse} штук на складе.')
+                if price == 0 or price is None:
+                    raise forms.ValidationError('Укажите цену.')
+                validate_quantity(user, quantity, price, warehouse)
+                correct_quantity_supplier(warehouse_supplier, quantity)
+            else:
+                raise forms.ValidationError(f'У поставщика нет этого товара на складе.')
+        else:
             if quantity == 0 or quantity is None:
                 raise forms.ValidationError('Укажите количество.')
-            if warehouse < quantity:
-                raise forms.ValidationError(f'У поставщика {warehouse} штук на складе.')
             if price == 0 or price is None:
                 raise forms.ValidationError('Укажите цену.')
-            validate_quantity(user, quantity, price, warehouse)
-            correct_quantity_supplier(warehouse_supplier, quantity)
-        else:
-            raise forms.ValidationError(f'У поставщика нет этого товара на складе.')
-    else:
-        if quantity == 0 or quantity is None:
-            raise forms.ValidationError('Укажите количество.')
-        if price == 0 or price is None:
-            raise forms.ValidationError('Укажите цену.')
 
 
 def validate_quantity(user, quantity, price, warehouse):
@@ -66,12 +69,10 @@ def correct_quantity_supplier(warehouse_supplier, quantity) -> None:
     """ Корректирование остатков поставщика """
     for warehouse_quantity in warehouse_supplier:
         if warehouse_quantity.quantity >= quantity:
-            print(f'warehouse_quantity.quantity >= quantity: {warehouse_quantity.quantity} >= {quantity}')
             warehouse_quantity.quantity -= quantity
             warehouse_quantity.save()
             break
         elif warehouse_quantity.quantity < quantity:
-            print(f'warehouse_quantity.quantity < quantity: {warehouse_quantity.quantity} < {quantity}')
             warehouse_quantity.quantity = 0
             quantity -= warehouse_quantity.quantity
             warehouse_quantity.save()

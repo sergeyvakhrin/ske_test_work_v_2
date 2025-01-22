@@ -1,7 +1,8 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import APIException
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
+    RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from products.models import Warehouse, Product
@@ -47,7 +48,7 @@ class UserUpdateAPIView(UpdateAPIView):
     permission_classes = (IsAuthenticated, IsOwner | IsModer)
 
     def get_serializer_class(self):
-        """Выбираем сериалайзер, для исключить редактирования полей client_type, debt, supplier для Update """
+        """ Выбираем сериалайзер, что бы исключить из редактирования поля client_type, debt, supplier для Update """
         serializer_class = self.serializer_class
         if self.request.method == 'PUT' or self.request.method == 'PATCH':
             serializer_class = UserSerializerWithoutDebtField
@@ -60,7 +61,10 @@ class UserDeleteAPIView(DestroyAPIView):
     permission_classes = (IsAuthenticated, IsOwner)
 
     def delete(self, request, *args, **kwargs):
-        """ Проверяем наличие покупателей и товаров на складе """
+        """
+        Проверяем наличие покупателей и товаров на складе.
+        Пере привязываем покупателе к предыдущему поставщику.
+        """
         user = User.objects.get(pk=self.kwargs.get('pk'))
         warehouse = Warehouse.objects.filter(user=user)
         if warehouse:
@@ -68,8 +72,6 @@ class UserDeleteAPIView(DestroyAPIView):
         if user.user_supplier:
             supplier = User.objects.get(pk=user.supplier_id)
             User.objects.filter(supplier=user).update(supplier=supplier)
-
-            # raise APIException('Сначала перенаправьте покупателей.')
 
         return self.destroy(request, *args, **kwargs)
 
@@ -106,8 +108,15 @@ class ProductUpdateAPIView(UpdateAPIView):
 
 
 class ProductDeleteAPIView(DestroyAPIView):
-    queryset = User.objects.all()
-    permission_classes = (IsAuthenticated, IsModer)
+    """ Контроллер удаления продуктов """
+    queryset = Product.objects.all()
+    permission_classes = (IsAuthenticated, IsModer, )
 
-    def delete(self, request, *args, **kwargs):
-        pass
+    def perform_destroy(self, instance):
+        """ Делаем продукты не опубликованными """
+        if instance:
+            if Warehouse.objects.filter(product=instance).exists():
+                instance.is_published = False
+                instance.save()
+                raise APIException('Нельзя удалить товар, если он находится на складе у клиента. Товар убран из продажи')
+            instance.delete()
