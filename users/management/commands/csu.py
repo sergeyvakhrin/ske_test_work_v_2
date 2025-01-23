@@ -12,16 +12,18 @@ class Command(BaseCommand):
         if not group:
             group = Group.objects.create(name='Moderators')
 
-        user = User.objects.create(
-            email='admin2@sky.pro',
-            is_staff=True,
-            is_superuser=True,
-            is_active=True,
-            name='Admin',
-            city='Russia'
-        )
-        user.set_password('1234')
-        user.save()
+        admin_user = User.objects.filter(is_superuser=True).exists()
+        if not admin_user:
+            user = User.objects.create(
+                email='admin@sky.pro',
+                is_staff=True,
+                is_superuser=True,
+                is_active=True,
+                name='Admin',
+                city='Russia'
+            )
+            user.set_password('1234')
+            user.save()
 
-        if group:
-            user.groups.add(group)
+            if group:
+                user.groups.add(group)

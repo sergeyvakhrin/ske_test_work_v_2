@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from users.views import UserCreateAPIView, UserListAPIView, UserRetrieveAPIView, UserUpdateAPIView, UserDeleteAPIView, \
-    RegisterView, logout_view, UserProfileView, UserDetailView, MyLoginView
+    RegisterView, logout_view, UserProfileView, UserDetailView, MyLoginView, UserListView
 from users.apps import UsersConfig
 
 app_name = UsersConfig.name
@@ -25,4 +25,6 @@ urlpatterns = [
 
     path('profile/', UserProfileView.as_view(), name='profile'),
     path('users/<int:pk>/view', UserDetailView.as_view(), name='user_detail'),
+    path('list/', UserListView.as_view(), name='user_list'),
+
 ]

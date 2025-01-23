@@ -3,6 +3,7 @@ from django.utils.safestring import mark_safe
 
 from products.forms import AdminFormWarehouse
 from products.models import Product, Warehouse
+from users.management.commands.csu import Command
 from users.models import User
 
 

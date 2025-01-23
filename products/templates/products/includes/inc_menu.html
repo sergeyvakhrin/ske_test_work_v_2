@@ -10,7 +10,12 @@
                 <ul class="list-unstyled">
 
                     <li><a href="{% url 'products:home' %}" class="text-white">Главная</a></li>
+                    <p> </p>
                     {% if user.is_authenticated %}
+                        <li><a href="{% url 'products:product_list' %}" class="text-white">Продукты</a></li>
+                        <li><a href="#" class="text-white">Склад</a></li>
+                        <li><a href="{% url 'users:user_list' %}" class="text-white">Клиенты Сети</a></li>
+                        <p> </p>
                         <li><a href="{% url 'users:profile' %}" class="text-white">Профиль</a></li>
                         <li><a href="{% url 'users:logout' %}" class="text-white">Выход</a></li>
                     {% else %}

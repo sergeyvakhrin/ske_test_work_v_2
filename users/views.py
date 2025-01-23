@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import APIException
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -12,6 +12,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from products.models import Warehouse
 from users.forms import UserRegisterForm, UserProfileForm, MyAuthenticationForm
+from users.management.commands.csu import Command
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
 from users.servises import IsOwner, IsModer, UsersCustomPagination
@@ -117,5 +118,10 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
 
 class UserDetailView(DetailView):
     """ Контроллер для отображения данных поставщика """
+    model = User
+
+
+class UserListView(ListView):
+    """ Контроллер получения списка клиентов """
     model = User
 

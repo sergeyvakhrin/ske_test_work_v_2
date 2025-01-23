@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import APIException
 from rest_framework.filters import SearchFilter
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+from products.forms import ProductCreateForm
 from products.models import Product, Warehouse
 from products.serializers import ProductSerializer, WarehouseSerializer
 from products.servises import ProductsCustomPagination, IsModer, IsOwner
@@ -95,3 +98,27 @@ def home(request):
     """ Контроллер стартовой страницы """
     context = {}
     return render(request, 'products/home.html', context)
+
+
+class ProductCreateView(CreateView):
+    """ Контроллер создания продукта """
+    model = Product
+    form_class = ProductCreateForm
+    template_name = 'products/product_register.html'
+    success_url = reverse_lazy('products:product_list')
+
+class ProductListView(ListView):
+    """ Контроллер просмотра списка продуктов """
+    model = Product
+
+
+class ProductDetailView(DetailView):
+    """ Контроллер просмотра деталей продукты """
+    model = Product
+
+
+class ProductUpdateView(UpdateView):
+    """ Контроллер изменения продукта """
+    model = Product
+    form_class = ProductCreateForm
+    success_url = reverse_lazy('products:product_list')

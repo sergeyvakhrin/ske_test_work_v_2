@@ -1,0 +1,35 @@
+{% extends 'products/home.html' %}
+{% load my_tags %}
+{% block content %}
+
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+        <div class="card shadow-sm">
+            <img src="{{ users.image | media_filter }}">
+            <div class="card-body">
+                <p class="card-text">Наименование: {{ object.name }}</p>
+                <p class="card-text">Модель: {{ object.model_product }}</p>
+                <p class="card-text">Описание: {{ object.description }}</p>
+                <p class="card-text">В продаже: {{ object.is_published }}</p>
+                <p class="card-text">Дата выхода на рынок: {{ object.release_date }}</p>
+
+                {% for item in object.client_list.all %}
+                {{ item.email }},
+                {% endfor %}
+                <p></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="{% url 'products:product_list' %}" role="button">Вернуться</a>
+                        <a class="btn btn-primary" href="{% url 'products:product_update' object.pk %}" role="button"> Изменить</a>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
