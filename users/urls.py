@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from users.views import UserCreateAPIView, UserListAPIView, UserRetrieveAPIView, UserUpdateAPIView, UserDeleteAPIView, \
-    RegisterView, logout_view, UserProfileView
+    RegisterView, logout_view, UserProfileView, UserDetailView, MyLoginView
 from users.apps import UsersConfig
 
 app_name = UsersConfig.name
@@ -20,8 +20,9 @@ urlpatterns = [
     path("api/delete/<int:pk>/", UserDeleteAPIView.as_view(), name="api-user-delete"),
 
     path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('login/', MyLoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', logout_view, name='logout'),
 
     path('profile/', UserProfileView.as_view(), name='profile'),
+    path('users/<int:pk>/view', UserDetailView.as_view(), name='user_detail'),
 ]
