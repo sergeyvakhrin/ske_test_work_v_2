@@ -11,11 +11,11 @@
 
                     <li><a href="{% url 'products:home' %}" class="text-white">Главная</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'products:profile' %}" class="text-white">Профиль</a></li>
-                        <li><a href="{% url 'products:logout' %}" class="text-white">Выход</a></li>
+                        <li><a href="{% url 'users:profile' %}" class="text-white">Профиль</a></li>
+                        <li><a href="{% url 'users:logout' %}" class="text-white">Выход</a></li>
                     {% else %}
-                        <li><a href="{% url 'products:login' %}" class="text-white">Авторизация</a></li>
-                        <li><a href="{% url 'products:register' %}" class="text-white">Регистрация</a></li>
+                        <li><a href="{% url 'users:login' %}" class="text-white">Авторизация</a></li>
+                        <li><a href="{% url 'users:register' %}" class="text-white">Регистрация</a></li>
                     {% endif %}
 
                 </ul>

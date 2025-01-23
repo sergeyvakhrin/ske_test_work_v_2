@@ -1,15 +1,19 @@
+from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import APIException
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
-    RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from products.models import Warehouse, Product
-from products.serializers import ProductSerializer, WarehouseSerializer
+from products.models import Warehouse
+from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
-from users.servises import IsOwner, IsModer, CustomPagination
+from users.servises import IsOwner, IsModer, UsersCustomPagination
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -29,7 +33,7 @@ class UserListAPIView(ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = (IsModer,)
-    pagination_class = CustomPagination
+    pagination_class = UsersCustomPagination
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['country']
     filterset_fields = ('country',)
@@ -76,82 +80,30 @@ class UserDeleteAPIView(DestroyAPIView):
         return self.destroy(request, *args, **kwargs)
 
 
-class ProductCreateAPIView(CreateAPIView):
-    """ Контроллер создания номенклатуры продуктов. """
-    serializer_class = ProductSerializer
-    permission_classes = (IsAuthenticated, )
+def logout_view(request):
+    """ Функция для кастомного выходы из сервиса """
+    logout(request)
+    return redirect('/')
 
 
-class ProductListAPIView(ListAPIView):
-    """ Контроллер вывода номенклатуры продуктов """
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, )
-    pagination_class = CustomPagination
-    filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['name', 'model_product', 'description']
-    filterset_fields = ('name', 'model_product', 'description',)
+class RegisterView(CreateView):
+    model = User
+    form_class = UserRegisterForm
+    template_name = 'users/register.html'
+    success_url = reverse_lazy('users:login')
+
+    def form_valid(self, form):
+        user = form.save()
+        user.set_password(user.password)
+        user.save()
+        return super().form_valid(form)
 
 
-class ProductRetrieveAPIView(RetrieveAPIView):
-    """ Контроллер получение отдельного продукта """
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, )
+class UserProfileView(LoginRequiredMixin, UpdateView):
+    """ Класс для просмотра и редактирования профиля пользователя """
+    model = User
+    form_class = UserProfileForm
+    success_url = reverse_lazy('products:profile')
 
-
-class ProductUpdateAPIView(UpdateAPIView):
-    """ Контроллер изменения продукта """
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, )
-
-
-class ProductDeleteAPIView(DestroyAPIView):
-    """ Контроллер удаления продуктов """
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, IsModer, )
-
-    def perform_destroy(self, instance):
-        """ Делаем продукты не опубликованными """
-        if instance:
-            if Warehouse.objects.filter(product=instance).exists():
-                instance.is_published = False
-                instance.save()
-                raise APIException('Нельзя удалить товар, если он находится на складе у клиента. Товар убран из продажи')
-            instance.delete()
-
-
-class WarehouseCreateAPIView(CreateAPIView):
-    """ Контроллер создания операции по складу """
-    serializer_class = WarehouseSerializer
-    permission_classes = (AllowAny,)
-
-
-class WarehouseListAPIView(ListAPIView):
-    """ Контроллер просмотра списка операции по складу """
-    serializer_class = WarehouseSerializer
-    queryset = Warehouse.objects.all()
-    permission_classes = (IsModer,)
-    pagination_class = CustomPagination
-    filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['product']
-    filterset_fields = ('product',)
-
-
-class WarehouseRetrieveAPIView(RetrieveAPIView):
-    """ Контроллер получение отдельной операции по складу """
-    serializer_class = WarehouseSerializer
-    queryset = Warehouse.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner | IsModer)
-
-
-class WarehouseDeleteAPIView(DestroyAPIView):
-    """ Контроллер удаления операции по складу """
-    queryset = Warehouse.objects.all()
-    permission_classes = (IsModer,)
-
-    def perform_destroy(self, instance):
-        """ Запрещаем удаление операций по складу """
-        if instance:
-            raise APIException('Нельзя удалять операции по складу без соответствующих документов!')
+    def get_object(self, queryset=None):
+        return self.request.user

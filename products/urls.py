@@ -1,17 +1,25 @@
-from django.contrib.auth.views import LoginView
 from django.urls import path
 
 from products.apps import ProductsConfig
-from products.views import home, logout_view, UserProfileView, RegisterView
+from products.views import home, ProductCreateAPIView, ProductListAPIView, ProductRetrieveAPIView, ProductUpdateAPIView, \
+    ProductDeleteAPIView, WarehouseCreateAPIView, WarehouseListAPIView, WarehouseRetrieveAPIView, WarehouseDeleteAPIView
 
 app_name = ProductsConfig.name
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(template_name='products/login.html'), name='login'),
-    path('logout/', logout_view, name='logout'),
+    path("api/product/create/", ProductCreateAPIView.as_view(), name="api-product-create"),
+    path("api/product/list/", ProductListAPIView.as_view(), name="api-product-list"),
+    path("api/product/<int:pk>/", ProductRetrieveAPIView.as_view(), name="api-product-get"),
+    path("api/product/update/<int:pk>/", ProductUpdateAPIView.as_view(), name="api-product-update"),
+    path("api/product/delete/<int:pk>/", ProductDeleteAPIView.as_view(), name="api-product-delete"),
 
-    path('profile/', UserProfileView.as_view(), name='profile'),
+    path("api/warehouse/create/", WarehouseCreateAPIView.as_view(), name="api-warehouse-create"),
+    path("api/warehouse/list/", WarehouseListAPIView.as_view(), name="api-warehouse-list"),
+    path("api/warehouse/<int:pk>/", WarehouseRetrieveAPIView.as_view(), name="api-warehouse-get"),
+    path("api/warehouse/delete/<int:pk>/", WarehouseDeleteAPIView.as_view(), name="api-warehouse-delete"),
+
+
+    path('', home, name='home'),
+
 
 ]

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from products.forms import FormWarehouse
+from products.forms import AdminFormWarehouse
 from products.models import Product, Warehouse
 from users.models import User
 
@@ -37,7 +37,7 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Warehouse)
 class WarehouseAdmin(admin.ModelAdmin):
     """ Выводим в админ панель таблицу товары на складе конкретного пользователя """
-    form = FormWarehouse
+    form = AdminFormWarehouse
     fields = ['user', 'product', 'quantity', 'price']
     list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'prod_is_published', 'quantity', 'price', 'user_name', 'user_email']
     list_display_links = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']

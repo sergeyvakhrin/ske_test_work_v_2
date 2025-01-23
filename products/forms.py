@@ -1,12 +1,10 @@
 from django import forms
-from django.forms import ModelForm
 
 from products.models import Warehouse
-from users.models import User
 from users.servises import validate_warehouse
 
 
-class FormWarehouse(forms.ModelForm):
+class AdminFormWarehouse(forms.ModelForm):
     class Meta:
         model = Warehouse
         fields = '__all__'
