@@ -13,7 +13,7 @@
                     <p> </p>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'products:product_list' %}" class="text-white">Продукты</a></li>
-                        <li><a href="#" class="text-white">Склад</a></li>
+                        <li><a href="{% url 'products:self_warehouse' %}" class="text-white">Склад</a></li>
                         <li><a href="{% url 'users:user_list' %}" class="text-white">Клиенты Сети</a></li>
                         <p> </p>
                         <li><a href="{% url 'users:profile' %}" class="text-white">Профиль</a></li>
@@ -30,7 +30,7 @@
 </div>
 <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-        <a href="#" class="navbar-brand d-flex align-items-center">
+        <a href="{% url 'users:profile' %}" class="navbar-brand d-flex align-items-center">
             <strong>Сервис сети по продаже электроники</strong>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"

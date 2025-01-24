@@ -26,5 +26,4 @@ urlpatterns = [
     path('profile/', UserProfileView.as_view(), name='profile'),
     path('users/<int:pk>/view', UserDetailView.as_view(), name='user_detail'),
     path('list/', UserListView.as_view(), name='user_list'),
-
 ]

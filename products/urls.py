@@ -3,7 +3,8 @@ from django.urls import path
 from products.apps import ProductsConfig
 from products.views import home, ProductCreateAPIView, ProductListAPIView, ProductRetrieveAPIView, ProductUpdateAPIView, \
     ProductDeleteAPIView, WarehouseCreateAPIView, WarehouseListAPIView, WarehouseRetrieveAPIView, \
-    WarehouseDeleteAPIView, ProductCreateView, ProductListView, ProductDetailView, ProductUpdateView
+    WarehouseDeleteAPIView, ProductCreateView, ProductListView, ProductDetailView, ProductUpdateView, \
+    WarehouseCreateView, WarehouseSupplierListView, WarehouseSelfListView
 
 app_name = ProductsConfig.name
 
@@ -20,9 +21,16 @@ urlpatterns = [
     path("api/warehouse/delete/<int:pk>/", WarehouseDeleteAPIView.as_view(), name="api-warehouse-delete"),
 
     path('', home, name='home'),
+
     path('product/create/', ProductCreateView.as_view(), name='product_create'),
     path('product/list/', ProductListView.as_view(), name='product_list'),
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('update/<int:pk>/', ProductUpdateView.as_view(), name='product_update'),
+
+    path('warehouse/create/', WarehouseCreateView.as_view(), name='warehouse_create'),
+    path('warehouse/list/', WarehouseSelfListView.as_view(), name='warehouse_list'),
+    path('warehouse/list/supplier/', WarehouseSupplierListView.as_view(), name='supplier_warehouse_create'),
+    path('warehouse/list/self/', WarehouseSelfListView.as_view(), name='self_warehouse'),
+
 
 ]

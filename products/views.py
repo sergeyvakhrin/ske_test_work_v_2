@@ -7,10 +7,11 @@ from rest_framework.filters import SearchFilter
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from products.forms import ProductCreateForm
+from products.forms import ProductCreateForm, FormWarehouse
 from products.models import Product, Warehouse
 from products.serializers import ProductSerializer, WarehouseSerializer
 from products.servises import ProductsCustomPagination, IsModer, IsOwner
+from users.models import User
 
 
 class ProductCreateAPIView(CreateAPIView):
@@ -122,3 +123,47 @@ class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductCreateForm
     success_url = reverse_lazy('products:product_list')
+
+
+class WarehouseCreateView(CreateView):
+    """ Контроллер создания записи в складе """
+    model = Warehouse
+    form_class = FormWarehouse
+    template_name = 'products/warehouse_register.html'
+    success_url = reverse_lazy('products:warehouse_list')
+
+    def get_form_kwargs(self):
+        """ Получаем доступ к queryset для фильтрации ManyToMany выводимых данных в форму создания рассылки списка клиентов client_lict
+        https://medium.com/analytics-vidhya/django-how-to-pass-the-user-object-into-form-classes-ee322f02948c"""
+        kwargs = super(WarehouseCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+
+# class WarehouseListView(ListView):
+#     """ Контроллер вывода записей склада """
+#     model = Warehouse
+
+
+class WarehouseSupplierListView(ListView):
+    """ Контроллер вывода остатков своего поставщика """
+    model = Warehouse
+    template_name = 'products/warehouse_sup_buy.html'
+
+    def get_queryset(self):
+        """ Получаем остаток склада поставщика """
+        user = self.request.user
+        supplier = user.supplier
+        queryset = Warehouse.objects.filter(user=supplier)
+        return queryset
+
+
+class WarehouseSelfListView(ListView):
+    """ контроллер остатков склада пользователя """
+    model = Warehouse
+
+    def get_queryset(self):
+        """ Получаем остаток склада пользователя """
+        user = self.request.user
+        queryset = Warehouse.objects.filter(user=user)
+        return queryset

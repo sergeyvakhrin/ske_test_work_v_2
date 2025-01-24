@@ -4,9 +4,11 @@
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="form-control text-center">Номенклатура</div>
-        <div class="card card-body">
-            <a href="{% url 'products:product_create' %}" role="button">Создать продукт</a>
-        </div>
+        {% if object.is_staff or object.is_superuser %}
+            <div class="card card-body">
+                <a href="{% url 'products:product_create' %}" role="button">Создать продукт</a>
+            </div>
+        {% endif %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
             {% if object_list %}
