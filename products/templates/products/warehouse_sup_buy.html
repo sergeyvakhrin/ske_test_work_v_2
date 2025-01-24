@@ -3,7 +3,7 @@
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-        <div class="form-control text-center">Остатки на складе</div>
+        <div class="form-control text-center">Остатки на складе Поставщика</div>
         <div class="card card-body">
             <a href="{% url 'products:warehouse_create' %}" role="button">Создать запись в складе</a>
 
@@ -23,7 +23,7 @@
                             <p class="card-text">Продукт: {{ item.product }}</p>
                             <p class="card-text">Количество: {{ item.quantity }}</p>
                             <p class="card-text">Цена: {{ item.price }}</p>
-                            <a class="btn btn-primary" href="{% url 'products:warehouse_create' %}" role="button">Купить</a>
+                            <a class="btn btn-primary" href="{% url 'products:warehouse_create_buy' %}" role="button">Купить</a>
                             <div class="d-flex justify-content-between align-items-center">
 
                             </div>

@@ -1,10 +1,11 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from products.apps import ProductsConfig
 from products.views import home, ProductCreateAPIView, ProductListAPIView, ProductRetrieveAPIView, ProductUpdateAPIView, \
     ProductDeleteAPIView, WarehouseCreateAPIView, WarehouseListAPIView, WarehouseRetrieveAPIView, \
     WarehouseDeleteAPIView, ProductCreateView, ProductListView, ProductDetailView, ProductUpdateView, \
-    WarehouseCreateView, WarehouseSupplierListView, WarehouseSelfListView
+    WarehouseCreateView, WarehouseSupplierListView, WarehouseSelfListView, WarehouseBuyCreateView
 
 app_name = ProductsConfig.name
 
@@ -28,6 +29,7 @@ urlpatterns = [
     path('product/update/<int:pk>/', ProductUpdateView.as_view(), name='product_update'),
 
     path('warehouse/create/', WarehouseCreateView.as_view(), name='warehouse_create'),
+    path('warehouse/create/buy/', WarehouseBuyCreateView.as_view(), name='warehouse_create_buy'),
     path('warehouse/list/', WarehouseSelfListView.as_view(), name='warehouse_list'),
     path('warehouse/list/supplier/', WarehouseSupplierListView.as_view(), name='supplier_warehouse_create'),
     path('warehouse/list/self/', WarehouseSelfListView.as_view(), name='self_warehouse'),

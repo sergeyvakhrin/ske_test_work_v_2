@@ -8,11 +8,10 @@ from rest_framework.filters import SearchFilter
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from products.forms import ProductCreateForm, FormWarehouse
+from products.forms import ProductCreateForm, FormWarehouse, FormWarehouseBuy
 from products.models import Product, Warehouse
 from products.serializers import ProductSerializer, WarehouseSerializer
 from products.servises import ProductsCustomPagination, IsModer, IsOwner
-from users.models import User
 
 
 class ProductCreateAPIView(CreateAPIView):
@@ -134,9 +133,24 @@ class WarehouseCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('products:warehouse_list')
 
     def get_form_kwargs(self):
-        """ Получаем доступ к queryset для фильтрации ManyToMany выводимых данных в форму создания рассылки списка клиентов client_lict
+        """ Получаем доступ к queryset для фильтрации
         https://medium.com/analytics-vidhya/django-how-to-pass-the-user-object-into-form-classes-ee322f02948c"""
         kwargs = super(WarehouseCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+
+class WarehouseBuyCreateView(LoginRequiredMixin, CreateView):
+    """ Контроллер создания записи в складе по кнопке Купить """
+    model = Warehouse
+    form_class = FormWarehouseBuy
+    template_name = 'products/warehouse_register.html'
+    success_url = reverse_lazy('products:warehouse_list')
+
+    def get_form_kwargs(self):
+        """ Получаем доступ к queryset для фильтрации
+        https://medium.com/analytics-vidhya/django-how-to-pass-the-user-object-into-form-classes-ee322f02948c"""
+        kwargs = super(WarehouseBuyCreateView, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
 

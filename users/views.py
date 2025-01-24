@@ -12,7 +12,6 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from products.models import Warehouse
 from users.forms import UserRegisterForm, UserProfileForm, MyAuthenticationForm, UserDebtNullForm
-from users.management.commands.csu import Command
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
 from users.servises import IsOwner, IsModer, UsersCustomPagination
