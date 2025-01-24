@@ -4,7 +4,7 @@
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="form-control text-center">Номенклатура</div>
-        {% if object.is_staff or object.is_superuser %}
+        {% if user.is_staff or user.is_superuser %}
             <div class="card card-body">
                 <a href="{% url 'products:product_create' %}" role="button">Создать продукт</a>
             </div>

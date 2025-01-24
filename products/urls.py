@@ -25,12 +25,12 @@ urlpatterns = [
     path('product/create/', ProductCreateView.as_view(), name='product_create'),
     path('product/list/', ProductListView.as_view(), name='product_list'),
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
-    path('update/<int:pk>/', ProductUpdateView.as_view(), name='product_update'),
+    path('product/update/<int:pk>/', ProductUpdateView.as_view(), name='product_update'),
 
     path('warehouse/create/', WarehouseCreateView.as_view(), name='warehouse_create'),
     path('warehouse/list/', WarehouseSelfListView.as_view(), name='warehouse_list'),
     path('warehouse/list/supplier/', WarehouseSupplierListView.as_view(), name='supplier_warehouse_create'),
     path('warehouse/list/self/', WarehouseSelfListView.as_view(), name='self_warehouse'),
-
+    # path('warehouse/update/<int:pk>/', WarehouseUpdateView.as_view(), name='warehouse_update'),
 
 ]

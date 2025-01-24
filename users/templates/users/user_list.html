@@ -7,7 +7,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
             {% for item in object_list %}
-
+            {% if not item.is_superuser or not item.is_staff %}
             <div class="col">
                 <div class="card shadow-sm">
                     <img src="{{ users.image | media_filter }}">
@@ -15,16 +15,22 @@
 
                         <p class="card-text">Наименование: {{ item.name }}</p>
                         <p class="card-text">Страна: {{ item.country }}</p>
+                        {% if user.is_superuser or user.is_staff %}
+                            <p class="card-text">Задолженность: {{ item.debt }}</p>
+                        {% endif %}
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{% url 'users:user_detail' item.pk %}" role="button">Посмотреть</a>
+                                    {% if user.is_superuser or user.is_staff %}
+                                        <a class="btn btn-primary" href="{% url 'users:user_update_debt_null' item.pk %}" role="button">Редактировать</a>
 
+                                    {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            {% endif %}
             {% endfor %}
         </div>
     </div>

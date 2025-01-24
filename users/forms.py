@@ -6,16 +6,28 @@ from users.models import User
 
 
 class UserRegisterForm(ModelForm):
-    """ Класс создания формы ввода номера телефона """
+    """ Класс создания формы пользователя """
     class Meta:
         model = User
         fields = ['name', 'email', 'password', 'country', 'city', 'street', 'house_number', 'client_type', 'supplier']
-        # TODO: поле 'password' переименовать в "Пароль для входа"
 
     def __init__(self, *args, **kwargs):
         """ Меняем password на Пароль """
         super().__init__(*args, **kwargs)
         self.fields['password'].label = 'Пароль'
+
+
+class UserDebtNullForm(ModelForm):
+    """ Класс редактирования данных пользователей с долгом """
+    class Meta:
+        model = User
+        fields = ['name', 'email', 'password', 'country', 'city', 'street', 'house_number', 'client_type', 'supplier', 'debt']
+
+    def __init__(self, *args, **kwargs):
+        """ Меняем password на Пароль """
+        super().__init__(*args, **kwargs)
+        self.fields['password'].label = 'Пароль'
+
 
 class UserProfileForm(UserChangeForm):
     """ Класс создания формы для просмотра деталей профиля пользователя """

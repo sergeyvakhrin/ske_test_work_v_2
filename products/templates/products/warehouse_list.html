@@ -6,7 +6,9 @@
         <div class="form-control text-center">Остатки на складе</div>
         <div class="card card-body">
             <a href="{% url 'products:warehouse_create' %}" role="button">Создать запись в складе</a>
-            <a href="{% url 'products:supplier_warehouse_create' %}" role="button">Товар на складе поставщика</a>
+            {% if not user.is_staff or not user.is_superuser %}
+                <a href="{% url 'products:supplier_warehouse_create' %}" role="button">Товар на складе поставщика</a>
+            {% endif %}
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 

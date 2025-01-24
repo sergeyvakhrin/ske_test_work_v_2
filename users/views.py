@@ -11,7 +11,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView,
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from products.models import Warehouse
-from users.forms import UserRegisterForm, UserProfileForm, MyAuthenticationForm
+from users.forms import UserRegisterForm, UserProfileForm, MyAuthenticationForm, UserDebtNullForm
 from users.management.commands.csu import Command
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
@@ -116,12 +116,25 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
-class UserDetailView(DetailView):
+class UserDetailView(LoginRequiredMixin, DetailView):
     """ Контроллер для отображения данных поставщика """
     model = User
 
 
-class UserListView(ListView):
+class UserListView(LoginRequiredMixin, ListView):
     """ Контроллер получения списка клиентов """
     model = User
 
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    """ Контроллер обновления пользователей """
+    model = User
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('users:user_list')
+
+
+class ProductDebtNullUpdateView(LoginRequiredMixin, UpdateView):
+    """ Контроллер обновления пользователей """
+    model = User
+    form_class = UserDebtNullForm
+    success_url = reverse_lazy('users:user_list')

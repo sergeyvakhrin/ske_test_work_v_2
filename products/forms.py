@@ -48,8 +48,17 @@ class FormWarehouse(forms.ModelForm):
         self.request = kwargs.pop('request')
         super(FormWarehouse, self).__init__(*args, **kwargs)
         user = self.request.user
-        self.fields['user'].queryset = User.objects.filter(email=user.email)
-        self.fields['user'].disabled = True
+
+        supplier = user.supplier
+        warehouse = Warehouse.objects.filter(user=supplier)
+        pk_list = [i.product_id for i in warehouse]
+
+        if not user.is_staff or not user.is_superuser:
+            self.fields['user'].queryset = User.objects.filter(email=user.email)
+            self.fields['product'].queryset = Product.objects.filter(pk__in=list(pk_list))
+        else:
+            self.fields['user'].queryset = User.objects.filter(is_staff=False, is_superuser=False)
+        # self.fields['user'].disabled = True
 
 
 class ProductCreateForm(forms.ModelForm):

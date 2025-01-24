@@ -22,7 +22,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a class="btn btn-primary" href="{% url 'products:product_list' %}" role="button">Вернуться</a>
-                        {% if object.is_staff or object.is_superuser %}
+                        {% if user.is_staff or user.is_superuser %}
                             <a class="btn btn-primary" href="{% url 'products:product_update' object.pk %}" role="button"> Изменить</a>
                         {% endif %}
                     </div>

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
@@ -101,7 +102,7 @@ def home(request):
     return render(request, 'products/home.html', context)
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     """ Контроллер создания продукта """
     model = Product
     form_class = ProductCreateForm
@@ -113,19 +114,19 @@ class ProductListView(ListView):
     model = Product
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     """ Контроллер просмотра деталей продукты """
     model = Product
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     """ Контроллер изменения продукта """
     model = Product
     form_class = ProductCreateForm
     success_url = reverse_lazy('products:product_list')
 
 
-class WarehouseCreateView(CreateView):
+class WarehouseCreateView(LoginRequiredMixin, CreateView):
     """ Контроллер создания записи в складе """
     model = Warehouse
     form_class = FormWarehouse
@@ -145,7 +146,7 @@ class WarehouseCreateView(CreateView):
 #     model = Warehouse
 
 
-class WarehouseSupplierListView(ListView):
+class WarehouseSupplierListView(LoginRequiredMixin, ListView):
     """ Контроллер вывода остатков своего поставщика """
     model = Warehouse
     template_name = 'products/warehouse_sup_buy.html'
@@ -153,17 +154,19 @@ class WarehouseSupplierListView(ListView):
     def get_queryset(self):
         """ Получаем остаток склада поставщика """
         user = self.request.user
-        supplier = user.supplier
-        queryset = Warehouse.objects.filter(user=supplier)
-        return queryset
+        if not user.is_staff or not user.is_superuser:
+            supplier = user.supplier
+            return Warehouse.objects.filter(user=supplier)
+        return Warehouse.objects.all()
 
 
-class WarehouseSelfListView(ListView):
+class WarehouseSelfListView(LoginRequiredMixin, ListView):
     """ контроллер остатков склада пользователя """
     model = Warehouse
 
     def get_queryset(self):
         """ Получаем остаток склада пользователя """
         user = self.request.user
-        queryset = Warehouse.objects.filter(user=user)
-        return queryset
+        if not user.is_staff or not user.is_superuser:
+            return Warehouse.objects.filter(user=user)
+        return Warehouse.objects.all()
