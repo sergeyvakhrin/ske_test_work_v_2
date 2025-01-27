@@ -20,7 +20,7 @@ class IsModer(permissions.BasePermission):
         return request.user.groups.filter(name='Moderators').exists()
 
 
-class CustomPagination(PageNumberPagination):
+class UsersCustomPagination(PageNumberPagination):
     """Контроль количества результатов на странице"""
     page_size = 5
     max_page_size = 100

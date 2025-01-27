@@ -1,15 +1,21 @@
+from django.contrib.auth.models import Group
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import APIException
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
-    RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from products.models import Warehouse, Product
-from products.serializers import ProductSerializer
+from products.models import Warehouse
+from users.forms import UserRegisterForm, UserProfileForm, MyAuthenticationForm, UserDebtNullForm
 from users.models import User
 from users.serializers import UserSerializer, UserSerializerWithoutDebtField
-from users.servises import IsOwner, IsModer, CustomPagination
+from users.servises import IsOwner, IsModer, UsersCustomPagination
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -18,8 +24,13 @@ class UserCreateAPIView(CreateAPIView):
     permission_classes = (AllowAny, )
 
     def perform_create(self, serializer):
-        """ Хешируем пароль """
-        user = serializer.save(is_active=True)
+        """ Хэшируем пароль. Первый пользователь суперпользователь """
+        if not User.objects.all().exists():
+            group = Group.objects.create(name='Moderators')
+            user = serializer.save(is_active=True, is_superuser=True, is_staff=True)
+            user.groups.add(group)
+        else:
+            user = serializer.save(is_active=True)
         user.set_password(user.password)
         user.save()
 
@@ -29,7 +40,7 @@ class UserListAPIView(ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = (IsModer,)
-    pagination_class = CustomPagination
+    pagination_class = UsersCustomPagination
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['country']
     filterset_fields = ('country',)
@@ -63,7 +74,7 @@ class UserDeleteAPIView(DestroyAPIView):
     def delete(self, request, *args, **kwargs):
         """
         Проверяем наличие покупателей и товаров на складе.
-        Пере привязываем покупателе к предыдущему поставщику.
+        Пере привязываем покупателей к предыдущему поставщику.
         """
         user = User.objects.get(pk=self.kwargs.get('pk'))
         warehouse = Warehouse.objects.filter(user=user)
@@ -76,47 +87,60 @@ class UserDeleteAPIView(DestroyAPIView):
         return self.destroy(request, *args, **kwargs)
 
 
-class ProductCreateAPIView(CreateAPIView):
-    """ Контроллер создания номенклатуры продуктов. """
-    serializer_class = ProductSerializer
-    permission_classes = (IsAuthenticated, )
+class MyLoginView(LoginView):
+    """ Все ради слова Пароль при авторизации """
+    form_class = MyAuthenticationForm
 
 
-class ProductListAPIView(ListAPIView):
-    """ Контроллер вывода номенклатуры продуктов """
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, )
-    pagination_class = CustomPagination
-    filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['name', 'model_product', 'description']
-    filterset_fields = ('name', 'model_product', 'description',)
+def logout_view(request):
+    """ Функция для кастомного выходы из сервиса """
+    logout(request)
+    return redirect('/')
 
 
-class ProductRetrieveAPIView(RetrieveAPIView):
-    """ Контроллер получение отдельного продукта """
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, )
+class RegisterView(CreateView):
+    """ Контроллер регистрации новых пользователей """
+    model = User
+    form_class = UserRegisterForm
+    template_name = 'users/register.html'
+    success_url = reverse_lazy('users:login')
+
+    def form_valid(self, form):
+        user = form.save()
+        user.set_password(user.password)
+        user.save()
+        return super().form_valid(form)
 
 
-class ProductUpdateAPIView(UpdateAPIView):
-    """ Контроллер изменения продукта """
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, )
+class UserProfileView(LoginRequiredMixin, UpdateView):
+    """ Класс для просмотра и редактирования профиля пользователя """
+    model = User
+    form_class = UserProfileForm
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
-class ProductDeleteAPIView(DestroyAPIView):
-    """ Контроллер удаления продуктов """
-    queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, IsModer, )
+class UserDetailView(LoginRequiredMixin, DetailView):
+    """ Контроллер для отображения данных поставщика """
+    model = User
 
-    def perform_destroy(self, instance):
-        """ Делаем продукты не опубликованными """
-        if instance:
-            if Warehouse.objects.filter(product=instance).exists():
-                instance.is_published = False
-                instance.save()
-                raise APIException('Нельзя удалить товар, если он находится на складе у клиента. Товар убран из продажи')
-            instance.delete()
+
+class UserListView(LoginRequiredMixin, ListView):
+    """ Контроллер получения списка клиентов """
+    model = User
+
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    """ Контроллер обновления пользователей """
+    model = User
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('users:user_list')
+
+
+class ProductDebtNullUpdateView(LoginRequiredMixin, UpdateView):
+    """ Контроллер обновления пользователей """
+    model = User
+    form_class = UserDebtNullForm
+    success_url = reverse_lazy('users:user_list')

@@ -3,98 +3,228 @@
     "model": "products.product",
     "pk": 1,
     "fields": {
+      "name": "Стол",
+      "model_product": "Обеденный",
+      "description": "888888888888888",
+      "photo": "products/photo/1347436498_demotivatory_11_yktJy5o.jpg",
+      "is_published": true,
+      "release_date": "2025-01-20"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
       "name": "Телевизор",
       "model_product": "Радуга",
       "description": "Цветной",
-      "photo": "products/photo/1347436498_demotivatory_11_w9GVMiu.jpg",
+      "photo": "products/photo/40812220_7FiyUF2.jpg",
       "is_published": true,
-      "release_date": "2025-01-20"
+      "release_date": "2025-01-18"
     }
   },
   {
     "model": "products.product",
-    "pk": 2,
+    "pk": 3,
     "fields": {
       "name": "Телефон",
       "model_product": "LG P500",
-      "description": "Смартфон",
-      "photo": "products/photo/карта_россии.jpg",
+      "description": "",
+      "photo": "",
       "is_published": true,
-      "release_date": "2025-01-20"
+      "release_date": "2025-01-23"
     }
   },
   {
     "model": "products.product",
-    "pk": 3,
+    "pk": 4,
     "fields": {
       "name": "Стул",
-      "model_product": "Компьютерный",
-      "description": "Железный",
-      "photo": "products/photo/7377.jpg",
+      "model_product": null,
+      "description": "",
+      "photo": "",
       "is_published": true,
-      "release_date": "2025-01-20"
+      "release_date": "2025-01-07"
     }
   },
   {
-    "model": "products.product",
+    "model": "products.warehouse",
     "pk": 4,
     "fields": {
-      "name": "Стол",
-      "model_product": "Обеденный",
-      "description": "Круглый",
-      "photo": "products/photo/Карта_мира.jpg",
-      "is_published": true,
-      "release_date": "2025-01-20"
-    }
-  },
-  {
-    "model": "products.warehouse",
-    "pk": 1,
-    "fields": {
-      "user": 2,
-      "product": 1,
-      "quantity": 10,
-      "price": 15000.0
-    }
-  },
-  {
-    "model": "products.warehouse",
-    "pk": 2,
-    "fields": {
-      "user": 12,
-      "product": 1,
-      "quantity": 1,
-      "price": 20000.0
-    }
-  },
-  {
-    "model": "products.warehouse",
-    "pk": 3,
-    "fields": {
-      "user": 7,
+      "user": 3,
       "product": 2,
-      "quantity": 3,
-      "price": 1500.0
-    }
-  },
-  {
-    "model": "products.warehouse",
-    "pk": 4,
-    "fields": {
-      "user": 13,
-      "product": 3,
-      "quantity": 5,
-      "price": 2000.0
+      "quantity": 2,
+      "price": 22.0
     }
   },
   {
     "model": "products.warehouse",
     "pk": 5,
     "fields": {
-      "user": 8,
+      "user": 3,
+      "product": 2,
+      "quantity": 3,
+      "price": 33.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 7,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 4,
+      "price": 44.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 8,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 6,
+      "price": 10000.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 9,
+    "fields": {
+      "user": 2,
+      "product": 4,
+      "quantity": 81,
+      "price": 1000.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 13,
+    "fields": {
+      "user": 3,
       "product": 4,
       "quantity": 1,
-      "price": 25000.0
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 14,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 16,
+    "fields": {
+      "user": 4,
+      "product": 2,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 17,
+    "fields": {
+      "user": 4,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 18,
+    "fields": {
+      "user": 4,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 19,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 20,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 21,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 22,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 23,
+    "fields": {
+      "user": 4,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 24,
+    "fields": {
+      "user": 2,
+      "product": 2,
+      "quantity": 5,
+      "price": 6.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 25,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 26,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
     }
   }
 ]

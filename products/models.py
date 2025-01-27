@@ -1,5 +1,6 @@
 from django.db import models
 
+from config import settings
 from users.models import User
 
 NULLABLE = {"null": True, "blank": True}
@@ -25,7 +26,7 @@ class Product(models.Model):
 
 class Warehouse(models.Model):
     """ Модель для таблицы Склад """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Организация', related_name='user_warehouse')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, verbose_name='Организация', related_name='user_warehouse')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, verbose_name='Продукты', related_name='product_warehouse')
     quantity = models.PositiveIntegerField(verbose_name='Количество', help_text='Укажите доступное количество', default=0)
     price = models.FloatField(verbose_name='Цена', help_text='Укажите стоимость', default=0)

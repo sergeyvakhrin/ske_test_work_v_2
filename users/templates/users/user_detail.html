@@ -1,0 +1,36 @@
+{% extends 'products/home.html' %}
+
+{% block content %}
+
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+                <p class="card-text">Почта: {{ object.email }}</p>
+                <p class="card-text">Наименование: {{ object.name }}</p>
+                <p class="card-text">Страна: {{ object.country }}</p>
+                <p class="card-text">Город: {{ object.city }}</p>
+                <p class="card-text">Улица: {{ object.street }}</p>
+                <p class="card-text">Номер дома: {{ object.house_number }}</p>
+                <p class="card-text">Тип клиента: {{ object.client_type }}</p>
+                <p class="card-text">Дата образования: {{ object.created_at }}</p>
+                {% if user.is_staff or user.is_superuser %}
+                    <p class="card-text">Долг: {{ object.debt }}</p>
+                {% endif %}
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="{% url 'users:user_list' %}" role="button">Вернуться</a>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

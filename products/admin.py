@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from products.forms import FormWarehouse
+from products.forms import FormWarehouse, AdminFormWarehouse
 from products.models import Product, Warehouse
 from users.models import User
 
@@ -37,38 +37,13 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Warehouse)
 class WarehouseAdmin(admin.ModelAdmin):
     """ Выводим в админ панель таблицу товары на складе конкретного пользователя """
-    form = FormWarehouse
+    form = AdminFormWarehouse
     fields = ['user', 'product', 'quantity', 'price']
     list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'prod_is_published', 'quantity', 'price', 'user_name', 'user_email']
     list_display_links = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
     search_fields = ['user', 'product', 'quantity', 'price']
     list_filter = ['user', 'product', 'quantity', 'price']
     save_on_top = True
-
-
-
-    # def save_model(self, request, obj, form, change):
-    #     """
-    #     Добавляем сумму задолженности перед поставщиком.
-    #     Проверяем наличие у поставщика товара у поставщика.
-    #     Уменьшаем количество товара у поставщика на складе.
-    #     """
-    #     user = form.cleaned_data.get('user')
-    #     if user and user.client_type != 'FACTORY':
-    #         supplier = user.supplier
-    #         product = form.cleaned_data.get('product')
-    #         warehouse_supplier = Warehouse.objects.filter(user=supplier, product=product)
-    #         warehouse = warehouse_supplier.aggregate(Sum('quantity')).get('quantity__sum')
-    #
-    #         if warehouse:
-    #             validate_quantity(user, obj, warehouse)
-    #             super().save_model(request, obj, form, change)
-    #             # raise f'У поставщика только {warehouse} штук на складе.'
-    #
-    #         correct_quantity_supplier(warehouse_supplier, obj)
-    #
-    #     super().save_model(request, obj, form, change)
-    #     Warehouse.objects.filter(quantity=0).delete()
 
     @admin.display(description='Модель')
     def product_model(self, warehouse: Warehouse):

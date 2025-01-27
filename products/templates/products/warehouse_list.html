@@ -1,0 +1,39 @@
+{% extends 'products/home.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="form-control text-center">Остатки на складе</div>
+        <div class="card card-body">
+            <a href="{% url 'products:warehouse_create' %}" role="button">Создать запись в складе</a>
+            {% if not user.is_staff or not user.is_superuser %}
+                <a href="{% url 'products:supplier_warehouse_create' %}" role="button">Товар на складе поставщика</a>
+            {% endif %}
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            {% if object_list %}
+                {% for item in object_list %}
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="{{ users.image | media_filter }}">
+                        <div class="card-body">
+
+                            <p class="card-text">Пользователь: {{ item.user }}</p>
+                            <p class="card-text">Продукт: {{ item.product }}</p>
+                            <p class="card-text">Количество: {{ item.quantity }}</p>
+                            <p class="card-text">Цена: {{ item.price }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

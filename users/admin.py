@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from products.models import Warehouse
 from users.models import User
 
@@ -23,8 +22,8 @@ class UserAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
     def delete_queryset(self, request, queryset):
-        """ Пере привязываем покупателей к следующему по иерархии поставщику, если удален текущий """
-        for user in queryset:
+        """ Перепривязываем покупателей к следующему по иерархии поставщику, если удален текущий """
+        for user in queryset:       # TODO: добавить запрет на удаление, если есть товар на складе
             if user.supplier:
                 User.objects.filter(supplier=user).update(supplier=user.supplier)
         queryset.delete()
