@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -23,8 +24,13 @@ class UserCreateAPIView(CreateAPIView):
     permission_classes = (AllowAny, )
 
     def perform_create(self, serializer):
-        """ Хешируем пароль """
-        user = serializer.save(is_active=True)
+        """ Хэшируем пароль. Первый пользователь суперпользователь """
+        if not User.objects.all().exists():
+            group = Group.objects.create(name='Moderators')
+            user = serializer.save(is_active=True, is_superuser=True, is_staff=True)
+            user.groups.add(group)
+        else:
+            user = serializer.save(is_active=True)
         user.set_password(user.password)
         user.save()
 

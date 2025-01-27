@@ -1,0 +1,1122 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2025-01-23T12:28:52.328Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "1",
+      "object_repr": "Стол",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2025-01-24T07:25:03.479Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "6",
+      "object_repr": "Завод имени Ленина",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2025-01-24T07:29:11.779Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "9",
+      "object_repr": "Завод имени Ленина",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2025-01-24T09:47:43.273Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "14",
+      "object_repr": "Розничная сеть №1",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2025-01-24T09:53:35.945Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "15",
+      "object_repr": "Завод имени Ленина",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2025-01-24T09:53:53.354Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "16",
+      "object_repr": "ИП Смирнов А.А.",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2025-01-24T09:54:05.767Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "17",
+      "object_repr": "ИП Смирнов А.А.",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2025-01-24T13:24:36.742Z",
+      "user": 1,
+      "content_type": 14,
+      "object_id": "24",
+      "object_repr": "Завод имени Ленина",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 1,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 4,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 4,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 4,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 4,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 5,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 5,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 5,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 5,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add crontab",
+      "content_type": 6,
+      "codename": "add_crontabschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change crontab",
+      "content_type": 6,
+      "codename": "change_crontabschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete crontab",
+      "content_type": 6,
+      "codename": "delete_crontabschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view crontab",
+      "content_type": 6,
+      "codename": "view_crontabschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add interval",
+      "content_type": 7,
+      "codename": "add_intervalschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change interval",
+      "content_type": 7,
+      "codename": "change_intervalschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete interval",
+      "content_type": 7,
+      "codename": "delete_intervalschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view interval",
+      "content_type": 7,
+      "codename": "view_intervalschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add periodic task",
+      "content_type": 8,
+      "codename": "add_periodictask"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change periodic task",
+      "content_type": 8,
+      "codename": "change_periodictask"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete periodic task",
+      "content_type": 8,
+      "codename": "delete_periodictask"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view periodic task",
+      "content_type": 8,
+      "codename": "view_periodictask"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add periodic task track",
+      "content_type": 9,
+      "codename": "add_periodictasks"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change periodic task track",
+      "content_type": 9,
+      "codename": "change_periodictasks"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete periodic task track",
+      "content_type": 9,
+      "codename": "delete_periodictasks"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view periodic task track",
+      "content_type": 9,
+      "codename": "view_periodictasks"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add solar event",
+      "content_type": 10,
+      "codename": "add_solarschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change solar event",
+      "content_type": 10,
+      "codename": "change_solarschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete solar event",
+      "content_type": 10,
+      "codename": "delete_solarschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view solar event",
+      "content_type": 10,
+      "codename": "view_solarschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add clocked",
+      "content_type": 11,
+      "codename": "add_clockedschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change clocked",
+      "content_type": 11,
+      "codename": "change_clockedschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete clocked",
+      "content_type": 11,
+      "codename": "delete_clockedschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view clocked",
+      "content_type": 11,
+      "codename": "view_clockedschedule"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can add Пользователь",
+      "content_type": 12,
+      "codename": "add_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can change Пользователь",
+      "content_type": 12,
+      "codename": "change_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+      "name": "Can delete Пользователь",
+      "content_type": 12,
+      "codename": "delete_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can view Пользователь",
+      "content_type": 12,
+      "codename": "view_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+      "name": "Can add Продукт",
+      "content_type": 13,
+      "codename": "add_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+      "name": "Can change Продукт",
+      "content_type": 13,
+      "codename": "change_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+      "name": "Can delete Продукт",
+      "content_type": 13,
+      "codename": "delete_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+      "name": "Can view Продукт",
+      "content_type": 13,
+      "codename": "view_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+      "name": "Can add Продукт на склад",
+      "content_type": 14,
+      "codename": "add_warehouse"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+      "name": "Can change Продукт на склад",
+      "content_type": 14,
+      "codename": "change_warehouse"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+      "name": "Can delete Продукт на склад",
+      "content_type": 14,
+      "codename": "delete_warehouse"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+      "name": "Can view Продукт на склад",
+      "content_type": 14,
+      "codename": "view_warehouse"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Moderators",
+      "permissions": []
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "django_celery_beat",
+      "model": "crontabschedule"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "django_celery_beat",
+      "model": "intervalschedule"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "django_celery_beat",
+      "model": "periodictask"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "django_celery_beat",
+      "model": "periodictasks"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "django_celery_beat",
+      "model": "solarschedule"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "django_celery_beat",
+      "model": "clockedschedule"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+      "app_label": "users",
+      "model": "user"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+      "app_label": "products",
+      "model": "product"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+      "app_label": "products",
+      "model": "warehouse"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "8kr25opnfgzjcw4zi0b5mipa2mvqtont",
+    "fields": {
+      "session_data": ".eJxVjDsOgzAQRO_iOrIw-Lcp03MGy95dxySRkTBUUe4ekCiScua9mbcIcVtL2BovYSJxFUpcfrsU8cn1APSI9T5LnOu6TEkeijxpk-NM_Lqd7t9Bia3sa0_aoc1D7zgZNJpzIuv3rLXyoBBdgq5HY9BrtN6DZSKNA3QZ0AGLzxfodDgB:1tbLMH:RiroZhsuJF3ef_8IxlFsmPonzFi-UcDE26PXS7NYmng",
+      "expire_date": "2025-02-07T15:12:33.517Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "an45wp62sy79yf0gqzfegvymaiyjwouu",
+    "fields": {
+      "session_data": ".eJxVjMEOwiAQRP-FsyGA0KUevfsNZNkFqRqalPZk_Hdp0oNe5jDvzbxFwG0tYWtpCROLiziL028XkZ6p7oAfWO-zpLmuyxTlrsiDNnmbOb2uh_t3ULCVvoac02AdONKkzMg9vbUWrUPyENVojM6DjZGzR2KlE2RKAKang8zi8wXmhDia:1tcPGn:3OWopKsbFcNdFvwqSfwgPCPoY7LKTd9kisZqE0koPdA",
+      "expire_date": "2025-02-10T13:35:17.991Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "pxqomfms9vdocmus42556zjv8iwkr00t",
+    "fields": {
+      "session_data": ".eJxVjDsOgzAQRO_iOrIw-Lcp03MGy95dxySRkTBUUe4ekCiScua9mbcIcVtL2BovYSJxFUpcfrsU8cn1APSI9T5LnOu6TEkeijxpk-NM_Lqd7t9Bia3sa0_aoc1D7zgZNJpzIuv3rLXyoBBdgq5HY9BrtN6DZSKNA3QZ0AGLzxfodDgB:1tbDbY:fxKjYpENtceUtKOf-qTerpnccjChq8niYeH5IxoIOoU",
+      "expire_date": "2025-02-07T06:55:48.425Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "rczt6dg4xtccfw8xwfkocrkjsi2t7pup",
+    "fields": {
+      "session_data": ".eJxVjMEOwiAQRP-FsyGA0KUevfsNZNkFqRqalPZk_Hdp0oNe5jDvzbxFwG0tYWtpCROLiziL028XkZ6p7oAfWO-zpLmuyxTlrsiDNnmbOb2uh_t3ULCVvoac02AdONKkzMg9vbUWrUPyENVojM6DjZGzR2KlE2RKAKang8zi8wXmhDia:1tbKzH:AQaq-H_9nSdEYHrRn6Qx9kq_b6Nb0lPcBiaa-8Zea-E",
+      "expire_date": "2025-02-07T14:48:47.889Z"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$E1I7H6tS7lRslPmXv3J9mn$Wy++Hh0DvP2iG8tcTVTUk7OOL/8Mh+/zdJAKp+SA47Q=",
+      "last_login": "2025-01-27T08:19:28.691Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-01-23T11:41:55.618Z",
+      "email": "admin@sky.pro",
+      "name": "Admin",
+      "country": "",
+      "city": "Russia",
+      "street": null,
+      "house_number": null,
+      "client_type": "",
+      "created_at": "2025-01-23",
+      "supplier": null,
+      "debt": 0.0,
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$PkzmK6c2YIWpDcUZlRZzld$cNFGphRyqy8/gTZh/+kZ1JzAb1FtxOiXDbRnBG1GmwQ=",
+      "last_login": "2025-01-24T10:25:40.523Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-01-23T11:42:41.199Z",
+      "email": "factory@mail.ru",
+      "name": "Завод имени Ленина",
+      "country": "Россия",
+      "city": "Самара",
+      "street": null,
+      "house_number": "1",
+      "client_type": "FACTORY",
+      "created_at": "2025-01-23",
+      "supplier": null,
+      "debt": 0.0,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$6hY2ceBoZeHgTegSOHiBCt$JQmOnqEFrtIjCLP/6bRyKdjE6UasHhKMeS36WsPN6jw=",
+      "last_login": "2025-01-27T13:35:17.987Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-01-23T11:43:13.997Z",
+      "email": "retail@mail.ru",
+      "name": "Розничная сеть №1",
+      "country": "Россия",
+      "city": "Самара",
+      "street": null,
+      "house_number": "2",
+      "client_type": "RETAIL",
+      "created_at": "2025-01-23",
+      "supplier": 2,
+      "debt": 0.0,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$WqC8sDerMHn9eISmGFFJYI$k5/u2bSqHxkSVIUp+NzjnIl87WWnzDo8ElmenMN6XQ4=",
+      "last_login": "2025-01-24T09:54:47.746Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-01-23T11:43:57.078Z",
+      "email": "individual@mail.ru",
+      "name": "ИП Смирнов А.А.",
+      "country": "Россия",
+      "city": "Самара",
+      "street": null,
+      "house_number": "1",
+      "client_type": "INDIVIDUAL",
+      "created_at": "2025-01-23",
+      "supplier": 3,
+      "debt": 0.0,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$8XXd58qbTnCnIFZPlxK1Fh$/F8M+wHkZLnfo59BmG61mQdVTOL+uXXT1+6R7PrwAhs=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-01-27T07:24:45.609Z",
+      "email": "individual5@mail.ru",
+      "name": "ИП Марков П.Р.",
+      "country": "Россия",
+      "city": "Тамбов",
+      "street": null,
+      "house_number": null,
+      "client_type": "INDIVIDUAL",
+      "created_at": "2025-01-27",
+      "supplier": 2,
+      "debt": 0.0,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "name": "Стол",
+      "model_product": "Обеденный",
+      "description": "888888888888888",
+      "photo": "products/photo/1347436498_demotivatory_11_yktJy5o.jpg",
+      "is_published": true,
+      "release_date": "2025-01-20"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "name": "Телевизор",
+      "model_product": "Радуга",
+      "description": "Цветной",
+      "photo": "products/photo/40812220_7FiyUF2.jpg",
+      "is_published": true,
+      "release_date": "2025-01-18"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "name": "Телефон",
+      "model_product": "LG P500",
+      "description": "",
+      "photo": "",
+      "is_published": true,
+      "release_date": "2025-01-23"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "name": "Стул",
+      "model_product": null,
+      "description": "",
+      "photo": "",
+      "is_published": true,
+      "release_date": "2025-01-07"
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 4,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 2,
+      "price": 22.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 5,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 3,
+      "price": 33.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 7,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 4,
+      "price": 44.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 8,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 6,
+      "price": 10000.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 9,
+    "fields": {
+      "user": 2,
+      "product": 4,
+      "quantity": 81,
+      "price": 1000.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 13,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 14,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 16,
+    "fields": {
+      "user": 4,
+      "product": 2,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 17,
+    "fields": {
+      "user": 4,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 18,
+    "fields": {
+      "user": 4,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 19,
+    "fields": {
+      "user": 3,
+      "product": 2,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 20,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 21,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 22,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 23,
+    "fields": {
+      "user": 4,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 24,
+    "fields": {
+      "user": 2,
+      "product": 2,
+      "quantity": 5,
+      "price": 6.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 25,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  },
+  {
+    "model": "products.warehouse",
+    "pk": 26,
+    "fields": {
+      "user": 3,
+      "product": 4,
+      "quantity": 1,
+      "price": 1.0
+    }
+  }
+]
