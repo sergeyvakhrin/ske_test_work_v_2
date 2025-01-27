@@ -68,7 +68,7 @@ class UserDeleteAPIView(DestroyAPIView):
     def delete(self, request, *args, **kwargs):
         """
         Проверяем наличие покупателей и товаров на складе.
-        Пере привязываем покупателе к предыдущему поставщику.
+        Пере привязываем покупателей к предыдущему поставщику.
         """
         user = User.objects.get(pk=self.kwargs.get('pk'))
         warehouse = Warehouse.objects.filter(user=user)
@@ -93,6 +93,7 @@ def logout_view(request):
 
 
 class RegisterView(CreateView):
+    """ Контроллер регистрации новых пользователей """
     model = User
     form_class = UserRegisterForm
     template_name = 'users/register.html'

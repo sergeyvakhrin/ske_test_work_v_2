@@ -108,6 +108,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     template_name = 'products/product_register.html'
     success_url = reverse_lazy('products:product_list')
 
+
 class ProductListView(ListView):
     """ Контроллер просмотра списка продуктов """
     model = Product
