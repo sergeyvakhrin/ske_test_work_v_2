@@ -92,10 +92,9 @@ class FormWarehouseBuy(forms.ModelForm):
 
         if not user.is_staff or not user.is_superuser:
             self.fields['user'].queryset = User.objects.filter(email=user.email)
-            self.fields['product'].queryset = Product.objects.filter(pk__in=pk_list) # TODO: выводить только выбранный товар
+            self.fields['product'].queryset = Product.objects.filter(pk__in=pk_list)  # TODO: выводить только выбранный товар
         else:
             self.fields['user'].queryset = User.objects.filter(is_staff=False, is_superuser=False)
-
 
 
 class ProductCreateForm(forms.ModelForm):

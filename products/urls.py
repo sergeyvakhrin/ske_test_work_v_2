@@ -34,5 +34,4 @@ urlpatterns = [
     path('warehouse/list/supplier/', WarehouseSupplierListView.as_view(), name='supplier_warehouse_create'),
     path('warehouse/list/self/', WarehouseSelfListView.as_view(), name='self_warehouse'),
     # path('warehouse/update/<int:pk>/', WarehouseUpdateView.as_view(), name='warehouse_update'),
-
 ]

@@ -21,7 +21,8 @@ class UserDebtNullForm(ModelForm):
     """ Класс редактирования данных пользователей с долгом """
     class Meta:
         model = User
-        fields = ['name', 'email', 'password', 'country', 'city', 'street', 'house_number', 'client_type', 'supplier', 'debt']
+        fields = ['name', 'email', 'password', 'country', 'city', 'street', 'house_number', 'client_type',
+                  'supplier', 'debt']
 
     def __init__(self, *args, **kwargs):
         """ Меняем password на Пароль """
@@ -35,7 +36,8 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['name', 'email', 'password', 'country', 'city', 'street', 'house_number', 'client_type', 'extra_created_at', 'supplier', 'debt']
+        fields = ['name', 'email', 'password', 'country', 'city', 'street', 'house_number', 'client_type',
+                  'extra_created_at', 'supplier', 'debt']
 
     def __init__(self, *args, **kwargs):
         """

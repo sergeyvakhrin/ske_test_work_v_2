@@ -39,8 +39,10 @@ class WarehouseAdmin(admin.ModelAdmin):
     """ Выводим в админ панель таблицу товары на складе конкретного пользователя """
     form = AdminFormWarehouse
     fields = ['user', 'product', 'quantity', 'price']
-    list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'prod_is_published', 'quantity', 'price', 'user_name', 'user_email']
-    list_display_links = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity', 'price', 'user_name', 'user_email']
+    list_display = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'prod_is_published',
+                    'quantity', 'price', 'user_name', 'user_email']
+    list_display_links = ['id', 'product', 'product_model', 'product_description', 'prod_photo', 'quantity',
+                          'price', 'user_name', 'user_email']
     search_fields = ['user', 'product', 'quantity', 'price']
     list_filter = ['user', 'product', 'quantity', 'price']
     save_on_top = True
@@ -90,5 +92,3 @@ class WarehouseAdmin(admin.ModelAdmin):
         if obj:
             return self.readonly_fields + ('user', 'product', 'quantity', 'price')
         return self.readonly_fields
-
-

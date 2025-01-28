@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import APIException
 from rest_framework.filters import SearchFilter
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 
 from products.forms import ProductCreateForm, FormWarehouse, FormWarehouseBuy
 from products.models import Product, Warehouse
@@ -56,7 +56,7 @@ class ProductDeleteAPIView(DestroyAPIView):
             if Warehouse.objects.filter(product=instance).exists():
                 instance.is_published = False
                 instance.save()
-                raise APIException('Нельзя удалить товар, если он находится на складе у клиента. Товар убран из продажи')
+                raise APIException('Нельзя удалить товар,если он находится на складе у клиента.Товар убран из продажи')
             instance.delete()
 
 

@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from products.models import Product, Warehouse
+from products.models import Product
 from users.models import User
 
 
@@ -51,7 +51,6 @@ class APIUsersTestCase(APITestCase):
         #     'supplier': 3
         # }
 
-
     def test_api_register(self):
         """ Проверяем создание пользователей API """
         url = reverse('users:api_register')
@@ -71,13 +70,13 @@ class APIUsersTestCase(APITestCase):
 
     def test_api_user_get(self):
         """ Проверяем получение данных пользователя API """
-        url = reverse('users:api-user-get',  args=(self.user.pk,))
+        url = reverse('users:api-user-get',  args=(self.user.pk, ))
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_api_user_update(self):
         """ Проверяем обновление данных пользователя API """
-        url = reverse('users:api-user-update', args=(self.user.pk,))
+        url = reverse('users:api-user-update', args=(self.user.pk, ))
         data = {
             'email': 'admin@sky.pro',
             'name': 'Администратор'
@@ -88,7 +87,7 @@ class APIUsersTestCase(APITestCase):
     def test_api_user_delete(self):
         """ Проверяем удаление пользователя API """
         user = User.objects.create(**self.user_factory)
-        url = reverse('users:api-user-delete', args=(user.pk,))
+        url = reverse('users:api-user-delete', args=(user.pk, ))
         # response = self.client.delete(url)
         # self.assertEqual(User.objects.all().count(), 1)
         # self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
