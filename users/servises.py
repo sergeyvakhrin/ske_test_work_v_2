@@ -65,6 +65,7 @@ def validate_quantity(user, quantity, price, warehouse):
         user.save()
     return user
 
+
 def correct_quantity_supplier(warehouse_supplier, quantity) -> None:
     """ Корректирование остатков поставщика """
     for warehouse_quantity in warehouse_supplier:
