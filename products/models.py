@@ -37,3 +37,5 @@ class Warehouse(models.Model):
 
     def __str__(self):
         return self.user.name
+
+# TODO: Добавить модель логирования операций по складу на случай удаления информации модератором в админке
