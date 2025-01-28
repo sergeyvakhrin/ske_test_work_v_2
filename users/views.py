@@ -45,6 +45,7 @@ class UserListAPIView(ListAPIView):
     search_fields = ['country']
     filterset_fields = ('country',)
 
+
 class UserRetrieveAPIView(RetrieveAPIView):
     """ Контроллер получение отдельного пользователя """
     serializer_class = UserSerializer

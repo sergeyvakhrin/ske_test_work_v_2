@@ -63,7 +63,7 @@ class ProductDeleteAPIView(DestroyAPIView):
 class WarehouseCreateAPIView(CreateAPIView):
     """ Контроллер создания операции по складу """
     serializer_class = WarehouseSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
 
 class WarehouseListAPIView(ListAPIView):
