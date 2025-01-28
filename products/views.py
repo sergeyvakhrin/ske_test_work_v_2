@@ -42,7 +42,7 @@ class ProductUpdateAPIView(UpdateAPIView):
     """ Контроллер изменения продукта """
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, IsModer)
 
 
 class ProductDeleteAPIView(DestroyAPIView):
@@ -63,7 +63,7 @@ class ProductDeleteAPIView(DestroyAPIView):
 class WarehouseCreateAPIView(CreateAPIView):
     """ Контроллер создания операции по складу """
     serializer_class = WarehouseSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
 
 class WarehouseListAPIView(ListAPIView):
